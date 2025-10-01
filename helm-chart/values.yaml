@@ -37,6 +37,11 @@ sidecars:
   # Specifies if the Sidecars are created or not. If true, one fine granular Sidecar per app is created.
   create: false
 
+istio:
+  enable: false
+  spire:
+    enable: false
+
 authorizationPolicies:
   # Specifies if the AuthorizationPolicies are created or not. If true, one fine granular AuthorizationPolicy per app is created.
   create: false
@@ -125,7 +130,7 @@ frontend:
   virtualService:
     create: false
     hosts:
-    - "*"
+      - "*"
     gateway:
       name: asm-ingressgateway
       namespace: asm-ingress

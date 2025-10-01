@@ -42,6 +42,8 @@ spec:
     metadata:
       labels:
         app: {{ .Values.shippingService.name }}
+        {{- include "onlineboutique.istio.injectLabel" . | nindent 8 }}
+      {{- include "onlineboutline.istio.annotations" . | nindent 6 }}
     spec:
       {{- if .Values.serviceAccounts.create }}
       serviceAccountName: {{ .Values.shippingService.name }}
