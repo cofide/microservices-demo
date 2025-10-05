@@ -143,6 +143,8 @@ frontend:
     limits:
       cpu: 200m
       memory: 128Mi
+  spiffeEnable:
+    enable: false
 
 loadGenerator:
   create: true
