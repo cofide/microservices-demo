@@ -43,7 +43,8 @@ spec:
       labels:
         app: {{ .Values.productCatalogService.name }}
         {{- include "onlineboutique.istio.injectLabel" . | nindent 8 }}
-      {{- include "onlineboutline.istio.annotations" . | nindent 6 }}
+      annotations:
+        {{- include "onlineboutique.istio.annotations" . | nindent 8 }}
     spec:
       {{- if .Values.serviceAccounts.create }}
       serviceAccountName: {{ .Values.productCatalogService.name }}
