@@ -42,6 +42,9 @@ spec:
     metadata:
       labels:
         app: {{ .Values.paymentService.name }}
+        {{- include "onlineboutique.istio.injectLabel" . | nindent 8 }}
+      annotations:
+        {{- include "onlineboutique.istio.annotations" . | nindent 8 }}
     spec:
       {{- if .Values.serviceAccounts.create }}
       serviceAccountName: {{ .Values.paymentService.name }}

@@ -38,14 +38,16 @@ spec:
       app: {{ .Values.cartService.name }}
   template:
     metadata:
-      {{- if .Values.cartDatabase.externalRedisTlsOrigination.enable }}
       annotations:
+        {{- include "onlineboutique.istio.annotations" . | nindent 8 }}
+        {{- if .Values.cartDatabase.externalRedisTlsOrigination.enable }}
         sidecar.istio.io/userVolumeMount: '[{"name": "{{ .Values.cartDatabase.externalRedisTlsOrigination.name }}", "mountPath": "/etc/certs", "readonly": true}]'
         sidecar.istio.io/userVolume: '[{"name": "{{ .Values.cartDatabase.externalRedisTlsOrigination.name }}", "secret": {"secretName": "{{ .Values.cartDatabase.externalRedisTlsOrigination.name }}"}}]'
         proxy.istio.io/config: '{"holdApplicationUntilProxyStarts": true}'
-      {{- end }}
+        {{- end }}
       labels:
         app: {{ .Values.cartService.name }}
+        {{- include "onlineboutique.istio.injectLabel" . | nindent 8 }}
     spec:
       {{- if .Values.serviceAccounts.create }}
       serviceAccountName: {{ .Values.cartService.name }}
